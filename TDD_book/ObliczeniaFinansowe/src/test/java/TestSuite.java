@@ -1,25 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-import com.mycompany.obliczeniafinansowe.Dollar;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
-import tests.TestDollar;
+import tests.Tests;
 
 /**
  *
  * @author Piotrek
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({TestDollar.class})
-public class DollarTestSuite {
+@Suite.SuiteClasses({Tests.class})
+public class TestSuite {
 
     @BeforeClass
     public static void setUpClass() throws Exception {
