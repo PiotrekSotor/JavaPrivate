@@ -1,6 +1,9 @@
 package tests;
 
+import com.mycompany.obliczeniafinansowe.Bank;
+import com.mycompany.obliczeniafinansowe.Expression;
 import com.mycompany.obliczeniafinansowe.Money;
+import com.mycompany.obliczeniafinansowe.Sum;
 import junit.framework.*;
 
 public class Tests extends TestCase {
@@ -23,9 +26,42 @@ public class Tests extends TestCase {
         assertEquals("USD", Money.dollar(1).currency());
         assertEquals("CHF", Money.franc(1).currency());
     }
-    
+  
     public void testSimpleAddition(){
-        Money sum = Money.dollar(5).plus(Money.dollar(5));
-        assertEquals(Money.dollar(10), sum);
+        Money five = Money.dollar(5);
+        Expression sum = five.plus(five);
+        Bank bank = new Bank();
+        Money reduced = bank.reduce(sum, "USD");
+        
+        assertEquals(Money.dollar(10), reduced);
+    }
+    
+    public void testPlusReturnSum(){
+        Money five = Money.dollar(5);
+        Expression result = five.plus(five);
+        Sum sum = (Sum) result;
+        
+        assertEquals(five, sum.augend);
+        assertEquals(five, sum.addend);
+    }
+    
+    public void testReduceSum(){
+        Sum sum = new Sum (Money.dollar(3), Money.dollar(4));
+        Bank bank = new Bank();
+        Money reduced = bank.reduce(sum, "USD");
+        assertEquals(Money.dollar(7), reduced);
+    }
+    
+    public void testReduceMoney(){
+        Bank bank = new Bank();
+        Money result = bank.reduce(Money.dollar(1),"USD");
+        assertEquals(Money.dollar(1), result);
+    }
+    
+    public void testReduceMoneyDifferentCurrency(){
+        Bank bank = new Bank();
+        bank.addRate("CHF", "USD",2.0);
+        Money result = bank.reduce(Money.franc(2), "USD");
+        assertEquals(Money.dollar(1), result);
     }
 }
