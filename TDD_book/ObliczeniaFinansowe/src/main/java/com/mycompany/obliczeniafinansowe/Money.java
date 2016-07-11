@@ -10,8 +10,8 @@ public class Money implements Expression{
     protected int amount;
     protected String currency;
 
-    public Money(int i, String a_currency) {
-        amount = i;
+    public Money(int a_amount, String a_currency) {
+        amount = a_amount;
         currency = a_currency;
     }
     
@@ -32,7 +32,7 @@ public class Money implements Expression{
         return false;
     }
     
-    public Money times(int i) {
+    public Expression times(int i) {
         return new Money(amount * i, currency);
     }
     
@@ -44,12 +44,15 @@ public class Money implements Expression{
         return new String (amount + " " + currency);
     }
 
-    public Expression plus(Money addend) {
+    public Expression plus(Expression addend) {
         return new Sum(this, addend);
     }
 
     @Override
-    public Money reduce(String currency) {
-        return this;
+    public Money reduce(Bank bank, String to) {
+        
+        int rate = bank.rate(this.currency, to);
+        return new Money(amount/rate, to);
     }
+
 }

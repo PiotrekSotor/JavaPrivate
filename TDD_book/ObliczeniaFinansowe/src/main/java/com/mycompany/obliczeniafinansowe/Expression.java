@@ -11,5 +11,7 @@ package com.mycompany.obliczeniafinansowe;
  */
 public interface Expression {
  
-    public Money reduce(String currency);
+    public Money reduce(Bank bank, String currency);
+    public Expression times(int i);
+    public Expression plus(Expression addend);
 }
