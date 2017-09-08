@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *.class
 
 # Mobile Tools for Java (J2ME)
@@ -15,3 +16,11 @@ hs_err_pid*
 /JUnits_book/Proj_1/build/
 /TDD_book/ObliczeniaFinansowe/nbproject/
 /TDD_book/ObliczeniaFinansowe/target/
+=======
+/.project
+/.settings
+/.classpath
+/.springBeans
+/target
+/bin
+>>>>>>> 3dbe482f9c0c6b8e715bb2cfaf2de72b479281a3
